@@ -1,0 +1,22 @@
+name: Manual Project Run
+
+on:
+  workflow_dispatch:
+    # Optional: You can define inputs that prompt the user when they click run
+    inputs:
+      environment:
+        description: 'Environment to run against'
+        required: true
+        default: 'dev'
+
+jobs:
+  run-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run project command
+        run: |
+          echo "Starting project in ${{ github.event.inputs.environment }} mode..."
+          npm start # Replace with your project's execution command
