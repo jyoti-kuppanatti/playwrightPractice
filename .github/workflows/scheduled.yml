@@ -4,13 +4,11 @@ run-name: 'Scheduled 11:55 AM IST Run'
 on:
   schedule:
     # 6:25 AM UTC translates to exactly 11:55 AM IST
-    - cron: '25 6 * * *'
+    - cron: '35 6 * * *'
 
 jobs:
   run-scheduled:
     runs-on: ubuntu-latest
-    # Defaults to pulling the 'dev' environment secrets
-    environment: dev
 
     steps:
       - name: Checkout code

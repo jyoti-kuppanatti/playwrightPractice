@@ -1,5 +1,4 @@
 name: Manual Project Run
-run-name: ${{ github.event_name == 'schedule' && 'Scheduled Project Run' || 'Manual Project Run' }}
 
 on:
   workflow_dispatch:
@@ -14,9 +13,6 @@ on:
           - dev
           - staging
         
-  schedule:
-    # GitHub Actions cron uses UTC. 05:00 UTC is 10:30 IST.
-    - cron: '0 5 * * *'
 
 jobs:
   run-project:
