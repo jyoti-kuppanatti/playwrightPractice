@@ -1,10 +1,10 @@
-name: Playwright Framework (Daily 11 AM IST Run)
-run-name: 'Scheduled 11AM IST Run'
+name: Playwright Framework (Daily 11:55 AM IST Run)
+run-name: 'Scheduled 11:55 AM IST Run'
 
 on:
   schedule:
-    # 5:30 AM UTC translates to exactly 11:00 AM IST
-    - cron: '15 6 * * *'
+    # 6:25 AM UTC translates to exactly 11:55 AM IST
+    - cron: '25 6 * * *'
 
 jobs:
   run-scheduled:
