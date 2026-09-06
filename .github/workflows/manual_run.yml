@@ -8,6 +8,8 @@ on:
         description: 'Environment to run against'
         required: true
         default: 'dev'
+  schedule:
+    - cron: '0 6 * * *'
 
 jobs:
   run-project:
@@ -15,8 +17,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+ 
+      - name: Announce environment
+        run: echo "Starting project in ${{ github.event.inputs.environment }} mode..."
 
-      - name: Run project command
-        run: |
-          echo "Starting project in ${{ github.event.inputs.environment }} mode..."
-          npm start # Replace with your project's execution command
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps
+
+      - run: npx playwright test
