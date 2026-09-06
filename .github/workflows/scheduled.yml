@@ -1,0 +1,42 @@
+name: Playwright Framework (Daily 11 AM IST Run)
+run-name: 'Scheduled 11AM IST Run'
+
+on:
+  schedule:
+    # 5:30 AM UTC translates to exactly 11:00 AM IST
+    - cron: '15 6 * * *'
+
+jobs:
+  run-scheduled:
+    runs-on: ubuntu-latest
+    # Defaults to pulling the 'dev' environment secrets
+    environment: dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright Tests
+        env:
+          PROJECT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          TARGET_ENV: 'dev'
+        run: npx playwright test
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scheduled-playwright-report
+          path: playwright-report/
+          retention-days: 7
