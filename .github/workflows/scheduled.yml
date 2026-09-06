@@ -1,5 +1,4 @@
 name: Playwright Framework (Daily 11:55 AM IST Run)
-run-name: 'Scheduled 11:55 AM IST Run'
 
 on:
   schedule:
