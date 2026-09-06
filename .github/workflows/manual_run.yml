@@ -6,8 +6,13 @@ on:
     inputs:
       environment:
         description: 'Environment to run against'
+        type: choice
         required: true
         default: 'dev'
+        options:
+          - development
+          - staging
+        
   schedule:
     - cron: '0 6 * * *'
 
